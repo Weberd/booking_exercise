@@ -9,7 +9,7 @@ use App\Services\AvailableSlotsHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class GetAvailableSlotsController extends Controller
+final class GetAvailableSlotsController extends Controller
 {
     public function __construct(private readonly AvailableSlotsHandler $availableSlotsHandler)
     {

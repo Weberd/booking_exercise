@@ -7,7 +7,7 @@ use App\Http\Resources\BookingResource;
 use App\Services\BookingHandler;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class GetBookingsController extends Controller
+final class GetBookingsController extends Controller
 {
     public function __construct(private readonly BookingHandler $bookingHandler)
     {

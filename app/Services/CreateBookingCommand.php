@@ -47,7 +47,14 @@ final class CreateBookingCommand
             }
 
             // Создаем бронирование
-            return Booking::create($data);
+            return Booking::create([
+                'service_id' => $bookingRequest->serviceId,
+                'customer_name' => $bookingRequest->customerName,
+                'customer_phone' => $bookingRequest->customerPhone,
+                'booking_date' => $bookingRequest->date,
+                'start_time' => $bookingRequest->startTime,
+                'end_time' => $bookingRequest->endTime,
+            ]);
         });
     }
 }

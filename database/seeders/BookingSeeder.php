@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Booking;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 

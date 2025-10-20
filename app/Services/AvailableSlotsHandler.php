@@ -26,7 +26,7 @@ final class AvailableSlotsHandler
         $workStart = Carbon::parse($date->format('Y-m-d') . ' 10:00');
         $workEnd = Carbon::parse($date->format('Y-m-d') . ' 20:00');
 
-        $totalDuration = $service->duration + 30;
+        $totalDuration = $service->duration;
 
         $current = $workStart->copy();
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Dto\BookingRequest;
+use App\Exception\BookingConflictException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateBookingRequest;
 use App\Services\CreateBookingCommand;
@@ -10,7 +11,7 @@ use App\Services\ServiceHandler;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 
-class CreateBookingController extends Controller
+final class CreateBookingController extends Controller
 {
     public function __construct(
         private readonly CreateBookingCommand $createBookingCommand,
@@ -23,7 +24,7 @@ class CreateBookingController extends Controller
         $data = $request->validated();
 
         try {
-            $service = Service::findOrFail($data['service_id']);
+            $service = $this->serviceHandler->getById($data['service_id']);
             $totalDuration = $service->duration + 30;
 
             $startTime = Carbon::parse($data['start_time']);
@@ -54,11 +55,6 @@ class CreateBookingController extends Controller
                 'message' => $e->getMessage(),
             ], 409);
 
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => $e->getMessage(),
-            ], 400);
         }
     }
 }
